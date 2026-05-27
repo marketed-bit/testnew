@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>腦年齡檢測活動滿意度調查</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap");
+
+:root {
+  --forest: #164536;
+  --leaf: #2f7a59;
+  --mint: #eaf5ef;
+  --sun: #d69b2d;
+  --sun-soft: #fff5df;
+  --ink: #1f2f2a;
+  --muted: #63746d;
+  --line: #dbe7e1;
+  --bg: #f6f8f5;
+  --white: #fff;
+  --danger: #c34a3d;
+  --shadow: 0 18px 48px rgba(18, 58, 44, .12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(214, 155, 45, .16), transparent 30%),
+    linear-gradient(180deg, #f9fbf7 0%, var(--bg) 42%, #eef6f1 100%);
+  font-family: "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(100%, 760px);
+  margin: 0 auto;
+  padding: 18px 16px 44px;
+}
+
+.hero {
+  min-height: 190px;
+  padding: 24px 20px 22px;
+  color: #fff;
+  background:
+    linear-gradient(135deg, rgba(22, 69, 54, .96), rgba(47, 122, 89, .9)),
+    url("https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1400&q=80");
+  background-size: cover;
+  background-position: center;
+  border-radius: 0 0 22px 22px;
+  box-shadow: var(--shadow);
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--sun);
+  color: var(--forest);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.brand-text strong {
+  display: block;
+  font-size: 17px;
+  letter-spacing: .04em;
+}
+
+.brand-text span {
+  display: block;
+  margin-top: 2px;
+  color: rgba(255, 255, 255, .78);
+  font-size: 12px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(25px, 7vw, 38px);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.hero p {
+  max-width: 590px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, .86);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.survey-panel {
+  margin-top: -20px;
+  overflow: hidden;
+  border: 1px solid rgba(219, 231, 225, .9);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, .97);
+  box-shadow: var(--shadow);
+}
+
+.progress-wrap {
+  padding: 18px 18px 0;
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.progress-bar {
+  height: 8px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #edf2ef;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--leaf), var(--sun));
+  transition: width .35s ease;
+}
+
+.screen {
+  display: none;
+  padding: 22px 18px 18px;
+}
+
+.screen.active {
+  display: block;
+  animation: rise .26s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 12px;
+  padding: 7px 11px;
+  border-radius: 999px;
+  color: var(--forest);
+  background: var(--sun-soft);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.screen h2 {
+  margin: 0;
+  color: var(--forest);
+  font-size: 23px;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.screen-lead {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.question {
+  margin-top: 24px;
+}
+
+.q-label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.55;
+}
+
+.required {
+  flex: 0 0 auto;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.scale {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.rating {
+  min-height: 62px;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--forest);
+  font-size: 20px;
+  font-weight: 900;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.rating:hover,
+.rating:focus-visible {
+  border-color: var(--leaf);
+  outline: none;
+}
+
+.rating.selected {
+  border-color: var(--sun);
+  background: var(--sun-soft);
+  transform: translateY(-1px);
+}
+
+.scale-caption {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.auto-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.text-area {
+  width: 100%;
+  min-height: 170px;
+  padding: 14px 15px;
+  resize: vertical;
+  border: 2px solid var(--line);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  line-height: 1.65;
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.text-area:focus {
+  border-color: var(--leaf);
+  box-shadow: 0 0 0 4px rgba(47, 122, 89, .1);
+}
+
+.helper {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 26px;
+}
+
+.btn {
+  min-height: 50px;
+  border: 0;
+  border-radius: 14px;
+  padding: 0 18px;
+  font-weight: 900;
+  transition: transform .18s ease, opacity .18s ease, background .18s ease;
+}
+
+.btn:active {
+  transform: scale(.98);
+}
+
+.btn-primary {
+  flex: 1;
+  background: var(--forest);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #1f5d49;
+}
+
+.btn-secondary {
+  min-width: 92px;
+  border: 2px solid var(--line);
+  background: #fff;
+  color: var(--forest);
+}
+
+.btn-secondary:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.message {
+  display: none;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 13px;
+  background: #fff0ed;
+  color: var(--danger);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.message.show {
+  display: block;
+}
+
+.review-card {
+  margin-top: 18px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: #fbfdfb;
+}
+
+.review-card dl {
+  margin: 0;
+}
+
+.review-card div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  padding: 10px 0;
+  border-bottom: 1px solid #edf2ef;
+}
+
+.review-card div:last-child {
+  border-bottom: 0;
+}
+
+.review-card dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.review-card dd {
+  margin: 0;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.thank-you {
+  text-align: center;
+  padding: 38px 18px 28px;
+}
+
+.thank-mark {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--leaf);
+  font-size: 38px;
+  font-weight: 900;
+}
+
+.thank-you h2 {
+  margin: 0;
+  color: var(--forest);
+  font-size: 25px;
+}
+
+.thank-you p {
+  margin: 12px auto 0;
+  max-width: 520px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.gift-card {
+  margin: 22px auto 0;
+  padding: 18px;
+  max-width: 520px;
+  border: 1px solid rgba(47, 122, 89, .18);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--mint), #fff);
+  text-align: left;
+}
+
+.gift-card strong {
+  display: block;
+  color: var(--forest);
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.gift-card span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.line-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  margin-top: 16px;
+  border-radius: 14px;
+  background: #06c755;
+  color: #fff;
+  font-weight: 900;
+  text-decoration: none;
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.line-button:hover {
+  filter: brightness(.96);
+}
+
+.line-button:active {
+  transform: scale(.98);
+}
+
+.staff-tools {
+  max-width: 520px;
+  margin: 18px auto 0;
+  text-align: left;
+}
+
+.staff-tools summary {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.download-row {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.copy-box {
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 13px;
+  background: #f7faf8;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: left;
+  word-break: break-word;
+}
+
+.privacy-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+@media (min-width: 680px) {
+  .app-shell {
+    padding-top: 26px;
+  }
+
+  .hero {
+    min-height: 250px;
+    padding: 34px 36px 32px;
+    border-radius: 24px;
+  }
+
+  .survey-panel {
+    margin-top: -32px;
+    border-radius: 22px;
+  }
+
+  .progress-wrap,
+  .screen {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .screen {
+    padding-bottom: 28px;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+
+  .btn-primary {
+    flex: 0 0 220px;
+  }
+}
+</style>
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero" aria-labelledby="pageTitle">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">活</div>
+        <div class="brand-text">
+          <strong>腦年齡檢測</strong>
+          <span>活動滿意度調查</span>
+        </div>
+      </div>
+      <h1 id="pageTitle">謝謝您今天來到現場</h1>
+      <p>這份問卷大約 2 分鐘。沒有標準答案，只想知道您最真實的感受，幫助我們把下一場活動辦得更舒服、更有收穫。</p>
+    </section>
+
+    <section class="survey-panel" aria-live="polite">
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="stepText">第 1 題，共 9 題</span>
+          <span id="progressText">11%</span>
+        </div>
+        <div class="progress-bar" aria-hidden="true">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <form id="surveyForm" novalidate>
+        <section class="screen active" data-step="0">
+          <span class="kicker">整體感受</span>
+          <h2>您對整場活動的感受</h2>
+          <p class="screen-lead">請依照直覺選擇即可，點選後會自動前往下一題。</p>
+          <div class="question" data-required="true">
+            <div class="q-label">
+              <span>活動氣氛是否讓您感到輕鬆愉快？</span>
+              <span class="required">必填</span>
+            </div>
+            <div class="scale" role="radiogroup" aria-label="活動氣氛">
+              <button type="button" class="rating" data-name="活動氣氛" data-value="1">1</button>
+              <button type="button" class="rating" data-name="活動氣氛" data-value="2">2</button>
+              <button type="button" class="rating" data-name="活動氣氛" data-value="3">3</button>
+              <button type="button" class="rating" data-name="活動氣氛" data-value="4">4</button>
+              <button type="button" class="rating" data-name="活動氣氛" data-value="5">5</button>
+            </div>
+            <div class="scale-caption"><span>比較緊繃</span><span>輕鬆愉快</span></div>
+            <div class="auto-note">選完會自動跳下一題</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" disabled>上一步</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="1">
+          <span class="kicker">整體感受</span>
+          <h2>活動內容收穫</h2>
+          <p class="screen-lead">請依照這次活動帶給您的實際感受作答。</p>
+          <div class="question" data-required="true">
+            <div class="q-label">
+              <span>運用保險獲得保障知識的收穫如何？</span>
+              <span class="required">必填</span>
+            </div>
+            <div class="scale" role="radiogroup" aria-label="保障知識收穫">
+              <button type="button" class="rating" data-name="保障知識收穫" data-value="1">1</button>
+              <button type="button" class="rating" data-name="保障知識收穫" data-value="2">2</button>
+              <button type="button" class="rating" data-name="保障知識收穫" data-value="3">3</button>
+              <button type="button" class="rating" data-name="保障知識收穫" data-value="4">4</button>
+              <button type="button" class="rating" data-name="保障知識收穫" data-value="5">5</button>
+            </div>
+            <div class="scale-caption"><span>收穫較少</span><span>很有收穫</span></div>
+            <div class="auto-note">選完會自動跳下一題</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="2">
+          <span class="kicker">講師執行</span>
+          <h2>說明方式</h2>
+          <p class="screen-lead">這一題會幫助我們調整未來的內容節奏。</p>
+          <div class="question" data-required="true">
+            <div class="q-label">
+              <span>講師的進行方式是否清晰易懂？</span>
+              <span class="required">必填</span>
+            </div>
+            <div class="scale" role="radiogroup" aria-label="講師清晰易懂">
+              <button type="button" class="rating" data-name="講師清晰易懂" data-value="1">1</button>
+              <button type="button" class="rating" data-name="講師清晰易懂" data-value="2">2</button>
+              <button type="button" class="rating" data-name="講師清晰易懂" data-value="3">3</button>
+              <button type="button" class="rating" data-name="講師清晰易懂" data-value="4">4</button>
+              <button type="button" class="rating" data-name="講師清晰易懂" data-value="5">5</button>
+            </div>
+            <div class="scale-caption"><span>較難理解</span><span>淺顯易懂</span></div>
+            <div class="auto-note">選完會自動跳下一題</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="3">
+          <span class="kicker">講師執行</span>
+          <h2>現場互動</h2>
+          <p class="screen-lead">請依照現場互動與參與感受作答。</p>
+          <div class="question" data-required="true">
+            <div class="q-label">
+              <span>講師與您的互動是否良好？</span>
+              <span class="required">必填</span>
+            </div>
+            <div class="scale" role="radiogroup" aria-label="講師互動">
+              <button type="button" class="rating" data-name="講師互動" data-value="1">1</button>
+              <button type="button" class="rating" data-name="講師互動" data-value="2">2</button>
+              <button type="button" class="rating" data-name="講師互動" data-value="3">3</button>
+              <button type="button" class="rating" data-name="講師互動" data-value="4">4</button>
+              <button type="button" class="rating" data-name="講師互動" data-value="5">5</button>
+            </div>
+            <div class="scale-caption"><span>互動較少</span><span>互動良好</span></div>
+            <div class="auto-note">選完會自動跳下一題</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="4">
+          <span class="kicker">講師執行</span>
+          <h2>問題回應</h2>
+          <p class="screen-lead">請依照講師回答問題時的清楚度與實用度作答。</p>
+          <div class="question" data-required="true">
+            <div class="q-label">
+              <span>講師回答問題的能力如何？</span>
+              <span class="required">必填</span>
+            </div>
+            <div class="scale" role="radiogroup" aria-label="回答問題能力">
+              <button type="button" class="rating" data-name="回答問題能力" data-value="1">1</button>
+              <button type="button" class="rating" data-name="回答問題能力" data-value="2">2</button>
+              <button type="button" class="rating" data-name="回答問題能力" data-value="3">3</button>
+              <button type="button" class="rating" data-name="回答問題能力" data-value="4">4</button>
+              <button type="button" class="rating" data-name="回答問題能力" data-value="5">5</button>
+            </div>
+            <div class="scale-caption"><span>需要加強</span><span>非常滿意</span></div>
+            <div class="auto-note">選完會自動跳下一題</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="5">
+          <span class="kicker">自由回饋，選填</span>
+          <h2>印象深刻的章節</h2>
+          <p class="screen-lead">可以寫很短，也可以直接略過。</p>
+          <div class="question">
+            <div class="q-label">
+              <span>本次活動中，哪一個章節讓您印象比較深刻？</span>
+            </div>
+            <textarea class="text-area" name="印象深刻章節" placeholder="例如：實際案例、互動問答、保險觀念整理..."></textarea>
+            <div class="helper">您的答案會幫助我們保留大家喜歡的內容。</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+            <button type="button" class="btn btn-primary" data-next>下一題</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="6">
+          <span class="kicker">自由回饋，選填</span>
+          <h2>可以更好的地方</h2>
+          <p class="screen-lead">不用客氣，真實意見最珍貴。</p>
+          <div class="question">
+            <div class="q-label">
+              <span>您認為有哪些需要改進的地方？</span>
+            </div>
+            <textarea class="text-area" name="需要改進的地方" placeholder="例如：時間安排、說明速度、場地動線、內容深度..."></textarea>
+            <div class="helper">若沒有特別想法，也可以直接下一題。</div>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+            <button type="button" class="btn btn-primary" data-next>下一題</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="7">
+          <span class="kicker">自由回饋，選填</span>
+          <h2>其他建議或意見</h2>
+          <p class="screen-lead">有任何想說的話，都可以留在這裡。</p>
+          <div class="question">
+            <div class="q-label">
+              <span>其他建議或意見</span>
+            </div>
+            <textarea class="text-area" name="其他建議" placeholder="謝謝您願意留下回饋。"></textarea>
+          </div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+            <button type="button" class="btn btn-primary" data-next>查看填寫內容</button>
+          </div>
+        </section>
+
+        <section class="screen" data-step="8">
+          <span class="kicker">最後確認</span>
+          <h2>確認後送出</h2>
+          <p class="screen-lead">送出後會記錄完成時間與您填寫的內容。</p>
+          <div class="review-card" id="reviewCard"></div>
+          <div class="message" id="submitMessage"></div>
+          <div class="actions">
+            <button type="button" class="btn btn-secondary" data-prev>上一步</button>
+            <button type="submit" class="btn btn-primary" id="submitBtn">送出問卷</button>
+          </div>
+        </section>
+      </form>
+
+      <section class="screen thank-you" id="thankYou">
+        <div class="thank-mark">✓</div>
+        <h2>已收到，謝謝您</h2>
+        <p>您的回饋會成為我們調整下一場活動的重要依據。也想邀請您加入我們的官方 LINE，後續活動與實用資訊都會在那裡分享。</p>
+        <div class="gift-card">
+          <strong>加入官方 LINE@，領取友善手冊小禮物</strong>
+          <span>加入後請在 LINE 裡告訴我們「我要友善手冊」，工作人員會協助您領取。</span>
+          <a class="line-button" href="https://lin.ee/OX2WFFx" target="_blank" rel="noopener">加入官方 LINE@</a>
+        </div>
+        <details class="staff-tools">
+          <summary>工作人員備份工具</summary>
+          <div class="download-row">
+            <button type="button" class="btn btn-primary" id="downloadCsv">下載本筆紀錄 CSV</button>
+            <button type="button" class="btn btn-secondary" id="copyJson">複製本筆資料</button>
+          </div>
+          <div class="copy-box" id="copyBox">若尚未串接後台，工作人員可以用上方按鈕保留這筆資料。</div>
+        </details>
+      </section>
+    </section>
+
+    <p class="privacy-note">本問卷僅用於活動改善與滿意度統計。若您沒有另外留下個人資料，系統不會主動要求姓名或電話。</p>
+  </main>
+
+<script>
+// Paste a Formspree, Make/Zapier webhook, Netlify Function, or your own API URL here.
+// Leave it blank while testing; submissions will still be saved in this browser and can be downloaded as CSV.
+const FORM_ENDPOINT = "https://formspree.io/f/xwvzallq";
+const EVENT_NAME = "腦年齡檢測活動滿意度調查";
+const RATING_STEP_COUNT = 5;
+
+const state = {
+  step: 0,
+  totalSteps: 9,
+  answers: {},
+  submittedPayload: null,
+  advanceTimer: null
+};
+
+const screens = Array.from(document.querySelectorAll(".screen[data-step]"));
+const stepText = document.getElementById("stepText");
+const progressText = document.getElementById("progressText");
+const progressFill = document.getElementById("progressFill");
+const form = document.getElementById("surveyForm");
+const thankYou = document.getElementById("thankYou");
+const submitMessage = document.getElementById("submitMessage");
+const submitBtn = document.getElementById("submitBtn");
+
+document.querySelectorAll(".rating").forEach((button) => {
+  button.setAttribute("aria-checked", "false");
+  button.addEventListener("click", () => {
+    const name = button.dataset.name;
+    const value = button.dataset.value;
+    state.answers[name] = value;
+
+    document.querySelectorAll(".rating").forEach((item) => {
+      if (item.dataset.name !== name) return;
+      item.classList.toggle("selected", item === button);
+      item.setAttribute("aria-checked", item === button ? "true" : "false");
+    });
+
+    clearTimeout(state.advanceTimer);
+    state.advanceTimer = setTimeout(() => {
+      if (state.step < RATING_STEP_COUNT) goToStep(state.step + 1);
+    }, 280);
+  });
+});
+
+document.querySelectorAll("[data-next]").forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!validateStep(state.step)) return;
+    if (state.step === 7) renderReview();
+    goToStep(state.step + 1);
+  });
+});
+
+document.querySelectorAll("[data-prev]").forEach((button) => {
+  button.addEventListener("click", () => {
+    clearTimeout(state.advanceTimer);
+    goToStep(state.step - 1);
+  });
+});
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  submitMessage.classList.remove("show");
+
+  const payload = buildPayload();
+  state.submittedPayload = payload;
+  submitBtn.disabled = true;
+  submitBtn.textContent = "送出中...";
+
+  try {
+    if (FORM_ENDPOINT) {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(toSubmissionFields(payload))
+      });
+
+      if (!response.ok) throw new Error("submit_failed");
+    }
+
+    saveLocalBackup(payload);
+    showThankYou();
+  } catch (error) {
+    saveLocalBackup(payload);
+    showMessage(submitMessage, "目前無法連上收件後台，但已在這台裝置暫存本筆資料。請下載 CSV 或稍後再試。");
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "送出問卷";
+  }
+});
+
+document.getElementById("downloadCsv").addEventListener("click", () => {
+  if (!state.submittedPayload) return;
+  downloadCsv(state.submittedPayload);
+});
+
+document.getElementById("copyJson").addEventListener("click", async () => {
+  if (!state.submittedPayload) return;
+  const text = JSON.stringify(state.submittedPayload, null, 2);
+  await navigator.clipboard.writeText(text);
+  document.getElementById("copyBox").textContent = "已複製本筆資料，可以貼到 Excel、Notion、LINE 或其他收件工具。";
+});
+
+function goToStep(nextStep) {
+  state.step = Math.max(0, Math.min(nextStep, state.totalSteps - 1));
+  screens.forEach((screen, index) => {
+    screen.classList.toggle("active", index === state.step);
+  });
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function updateProgress() {
+  const percent = Math.round(((state.step + 1) / state.totalSteps) * 100);
+  stepText.textContent = state.step === state.totalSteps - 1
+    ? "最後確認"
+    : `第 ${state.step + 1} 題，共 ${state.totalSteps - 1} 題`;
+  progressText.textContent = `${percent}%`;
+  progressFill.style.width = `${percent}%`;
+}
+
+function validateStep(step) {
+  const screen = document.querySelector(`.screen[data-step="${step}"]`);
+  const question = screen.querySelector(".question[data-required='true']");
+  if (!question) return true;
+
+  const firstRating = question.querySelector(".rating");
+  const name = firstRating.dataset.name;
+  if (!state.answers[name]) {
+    let message = screen.querySelector(".message");
+    if (!message) {
+      message = document.createElement("div");
+      message.className = "message";
+      screen.appendChild(message);
+    }
+    showMessage(message, "請先選擇一個分數，就會自動前往下一題。");
+    return false;
+  }
+
+  return true;
+}
+
+function showMessage(element, text) {
+  if (!element) return;
+  element.textContent = text;
+  element.classList.add("show");
+}
+
+function collectTextAnswers() {
+  const result = {};
+  document.querySelectorAll("textarea").forEach((textarea) => {
+    result[textarea.name] = textarea.value.trim();
+  });
+  return result;
+}
+
+function buildPayload() {
+  const now = new Date();
+  return {
+    eventName: EVENT_NAME,
+    completedAt: now.toISOString(),
+    completedAtLocal: now.toLocaleString("zh-TW", { hour12: false }),
+    ratings: {
+      "活動氣氛": state.answers["活動氣氛"] || "",
+      "保障知識收穫": state.answers["保障知識收穫"] || "",
+      "講師清晰易懂": state.answers["講師清晰易懂"] || "",
+      "講師互動": state.answers["講師互動"] || "",
+      "回答問題能力": state.answers["回答問題能力"] || ""
+    },
+    comments: collectTextAnswers(),
+    userAgent: navigator.userAgent
+  };
+}
+
+function toSubmissionFields(payload) {
+  return {
+    "活動名稱": payload.eventName,
+    "完成時間": payload.completedAtLocal,
+    "ISO時間": payload.completedAt,
+    "活動氣氛": payload.ratings["活動氣氛"],
+    "保障知識收穫": payload.ratings["保障知識收穫"],
+    "講師清晰易懂": payload.ratings["講師清晰易懂"],
+    "講師互動": payload.ratings["講師互動"],
+    "回答問題能力": payload.ratings["回答問題能力"],
+    "印象深刻章節": payload.comments["印象深刻章節"],
+    "需要改進的地方": payload.comments["需要改進的地方"],
+    "其他建議": payload.comments["其他建議"]
+  };
+}
+
+function renderReview() {
+  const payload = buildPayload();
+  const rows = [
+    ["完成時間", payload.completedAtLocal],
+    ["活動氣氛", scoreLabel(payload.ratings["活動氣氛"])],
+    ["保障知識收穫", scoreLabel(payload.ratings["保障知識收穫"])],
+    ["講師清晰易懂", scoreLabel(payload.ratings["講師清晰易懂"])],
+    ["講師互動", scoreLabel(payload.ratings["講師互動"])],
+    ["回答問題能力", scoreLabel(payload.ratings["回答問題能力"])],
+    ["印象深刻章節", payload.comments["印象深刻章節"] || "未填寫"],
+    ["需要改進的地方", payload.comments["需要改進的地方"] || "未填寫"],
+    ["其他建議", payload.comments["其他建議"] || "未填寫"]
+  ];
+
+  document.getElementById("reviewCard").innerHTML = `
+    <dl>
+      ${rows.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}
+    </dl>
+  `;
+}
+
+function scoreLabel(value) {
+  if (!value) return "未填寫";
+  return `${value} / 5`;
+}
+
+function saveLocalBackup(payload) {
+  const key = "bodyBrainSurveySubmissions";
+  const current = JSON.parse(localStorage.getItem(key) || "[]");
+  current.push(payload);
+  localStorage.setItem(key, JSON.stringify(current));
+}
+
+function showThankYou() {
+  form.style.display = "none";
+  thankYou.classList.add("active");
+  progressFill.style.width = "100%";
+  stepText.textContent = "已完成";
+  progressText.textContent = "100%";
+}
+
+function downloadCsv(payload) {
+  const flat = toSubmissionFields(payload);
+
+  const headers = Object.keys(flat);
+  const values = headers.map((header) => csvEscape(flat[header]));
+  const csv = "\uFEFF" + headers.join(",") + "\n" + values.join(",");
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `腦年齡檢測滿意度_${Date.now()}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function csvEscape(value) {
+  const text = String(value || "");
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+updateProgress();
+</script>
+</body>
+</html>
